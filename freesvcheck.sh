@@ -156,7 +156,7 @@ funcFilter() {
 		_filter="(ssl.handshake.type == 1 && ssl.handshake.extension.type == "server_name")"
 		_fields="-e frame.time -e ip.src -e ip.dst -e ssl.handshake.extensions_server_name"
 	elif [[ ${_dns} -eq 1 ]]; then
-		_filter="( dns.qry.name) && (dns.flags == 0x0100)"
+		_filter="(dns.qry.name) && (dns.flags.response == 0)"
 		_fields="-e frame.time -e ip.src -e ip.dst -e dns.qry.name"
 	fi
 
