@@ -44,7 +44,7 @@ unset count
 
 usage() {
 	echo "From the Free OCSAF project"
-	echo "OCSAF FREESVCHECK v0.1 - GPLv3 (https://freecybersecurity.org)"
+	echo "OCSAF FREESVCHECK v0.2 - GPLv3 (https://freecybersecurity.org)"
 	echo "Use only with legal authorization and at your own risk!"
        	echo "ANY LIABILITY WILL BE REJECTED!"
        	echo ""	
@@ -153,8 +153,8 @@ funcFilter() {
 
 	#SNI or DNS filtering
 	if ! [[ ${_dns} -eq 1 ]]; then
-		_filter="(ssl.handshake.type == 1 && ssl.handshake.extension.type == "server_name")"
-		_fields="-e frame.time -e ip.src -e ip.dst -e ssl.handshake.extensions_server_name"
+		_filter="(tls.handshake.type == 1 && tls.handshake.extension.type == "server_name")"
+		_fields="-e frame.time -e ip.src -e ip.dst -e tls.handshake.extensions_server_name"
 	elif [[ ${_dns} -eq 1 ]]; then
 		_filter="(dns.qry.name) && (dns.flags.response == 0)"
 		_fields="-e frame.time -e ip.src -e ip.dst -e dns.qry.name"
